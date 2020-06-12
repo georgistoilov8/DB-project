@@ -208,3 +208,15 @@ ADD FOREIGN KEY (cardStatusID) REFERENCES Card_Status(ID);
 
 ALTER TABLE Card_Travel
 ADD FOREIGN KEY (cardStatusID) REFERENCES Card_Status(ID);
+                                               
+ALTER TABLE Works
+ADD FOREIGN KEY (lineID) REFERENCES Line(ID)
+ADD FOREIGN KEY (workerEGN) REFERENCES Worker(EGN);
+
+ALTER TABLE Consist_Of
+ADD FOREIGN KEY (lineID) REFERENCES Line(ID)
+ADD FOREIGN KEY (stopID) REFERENCES Stop(ID);
+
+ALTER TABLE Provides
+ADD FOREIGN KEY (arrivalTimeID) REFERENCES Arrival_Type(ID)
+ADD FOREIGN KEY (scheduleID) REFERENCES Schedule(ID);
