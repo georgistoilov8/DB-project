@@ -28,7 +28,7 @@ public class TransportController {
         return repository.getLinesGroupedByType();
     }
 
-    @GetMapping("/stop/{lineId}")
+    @GetMapping("/line/{lineId}/stop")
     List<Stop> getStopsByLine(@PathVariable int lineId) {
         return repository.getStopsByLine(lineId);
     }
