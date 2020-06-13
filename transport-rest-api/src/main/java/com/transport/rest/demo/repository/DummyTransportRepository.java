@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@Repository
+//@Repository
 public class DummyTransportRepository implements TransportRepository {
 
     @Override
@@ -17,7 +17,7 @@ public class DummyTransportRepository implements TransportRepository {
 
     @Override
     public List<Line> getLinesGroupedByType() {
-        return Arrays.asList(new Line(3, 3, 3, 4), new Line(2, 2, 2, 2));
+        return Arrays.asList(new Line(3, 3, 3, 4, "subway"), new Line(2, 2, 2, 2, "bus"));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DummyTransportRepository implements TransportRepository {
 
     @Override
     public List<Schedule> getSchedulesByLineAndStops(int lineId, List<Integer> stopIds) {
-        return Arrays.asList(new Schedule(1, 1, 1, "t1", new Date(), Arrays.asList(new ArrivalTime(12,30), new ArrivalTime(14, 0))));
+        return Arrays.asList(new Schedule(1, 1, 1, "s1", "d1", new Date(), Arrays.asList(new ArrivalTime(12,30), new ArrivalTime(14, 0))));
     }
 
     @Override

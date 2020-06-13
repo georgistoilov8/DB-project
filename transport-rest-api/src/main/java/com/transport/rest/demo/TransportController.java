@@ -2,10 +2,7 @@ package com.transport.rest.demo;
 
 import com.transport.rest.demo.model.*;
 import com.transport.rest.demo.repository.TransportRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +34,7 @@ public class TransportController {
     }
 
     @GetMapping("/schedule/{lineId}")
-    List<Schedule> getSchedulesByLineAndStops(@PathVariable int lineId, ArrayList<Integer> stopIds) {
+    List<Schedule> getSchedulesByLineAndStops(@PathVariable int lineId, @RequestBody ArrayList<Integer> stopIds) {
         return repository.getSchedulesByLineAndStops(lineId, stopIds);
     }
 

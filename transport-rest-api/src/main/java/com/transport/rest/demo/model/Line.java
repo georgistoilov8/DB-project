@@ -5,15 +5,25 @@ public class Line {
     int number;
     int stopsCount;
     double distance;
+    String type;
 
     public Line() {
     }
 
-    public Line(int id, int number, int stopsCount, double distance) {
+    public Line(int id, int number, int stopsCount, double distance, String type) {
         this.id = id;
         this.number = number;
         this.stopsCount = stopsCount;
         this.distance = distance;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setId(int id) {
