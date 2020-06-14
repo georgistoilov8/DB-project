@@ -183,7 +183,6 @@ CREATE TABLE Provides
     PRIMARY KEY (arrivalTimeID, scheduleID)
 );
 
-
 -- Add all foreign keys
 ALTER TABLE Worker
 ADD FOREIGN KEY (workerTypeID) REFERENCES WORK_TYPE(ID);
@@ -208,7 +207,7 @@ ADD FOREIGN KEY (cardStatusID) REFERENCES Card_Status(ID);
 
 ALTER TABLE Card_Travel
 ADD FOREIGN KEY (cardStatusID) REFERENCES Card_Status(ID);
-                                               
+
 ALTER TABLE Works
 ADD FOREIGN KEY (lineID) REFERENCES Line(ID)
 ADD FOREIGN KEY (workerEGN) REFERENCES Worker(EGN);
@@ -220,3 +219,11 @@ ADD FOREIGN KEY (stopID) REFERENCES Stop(ID);
 ALTER TABLE Provides
 ADD FOREIGN KEY (arrivalTimeID) REFERENCES Arrival_Type(ID)
 ADD FOREIGN KEY (scheduleID) REFERENCES Schedule(ID);
+
+ALTER TABLE Card_Line
+ADD FOREIGN KEY (lineID) REFERENCES Line(ID)
+ADD FOREIGN KEY (passengerEGN) REFERENCES Passenger(egn);
+
+ALTER TABLE Card_Travel
+ADD FOREIGN KEY (lineID) REFERENCES Line(ID)
+ADD FOREIGN KEY (passengerEGN) REFERENCES Passenger(egn);
