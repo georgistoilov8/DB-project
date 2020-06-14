@@ -21,6 +21,7 @@ DROP FUNCTION Getstops;
 SELECT * FROM TABLE (FN45465.Getstops('CB2020HX'));
 
 
+/* -||-
 IF OBJECT_ID (N'Getmaxdist', N'IF') IS NOT NULL  
     DROP FUNCTION Getdist;  
 GO  
@@ -33,3 +34,11 @@ BEGIN
 	Return @ret;
 
 END;
+*/
+DROP FUNCTION Getdist;
+
+CREATE FUNCTION Getmaxdist ()
+RETURNS REAL
+RETURN SELECT Max (distance) FROM Line;
+
+SELECT * FROM Line WHERE distance = FN45465.Getmaxdist()
