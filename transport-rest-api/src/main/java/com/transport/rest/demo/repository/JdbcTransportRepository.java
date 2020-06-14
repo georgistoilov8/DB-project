@@ -95,7 +95,7 @@ public class JdbcTransportRepository implements TransportRepository {
                     s.setStopId(rs.getInt("stopID"));
                     s.setSeason(rs.getString("season"));
                     s.setDayType(rs.getString("dayType"));
-                    s.setDate(rs.getDate("currentDate"));
+                    s.setDate(rs.getDate("date"));
                     return s;
                 });
 
