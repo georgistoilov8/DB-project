@@ -14,6 +14,6 @@ CREATE FUNCTION Getmaxdist ()
 RETURNS REAL
 RETURN SELECT Max (distance) FROM Line;
 
-DROP FUNCTION Getdist;
+DROP FUNCTION Getmaxdist;
 				      
 SELECT * FROM Line WHERE distance = FN45465.Getmaxdist()
