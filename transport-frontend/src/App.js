@@ -5,10 +5,12 @@ import Select from "@material-ui/core/Select"
 import MenuItem from "@material-ui/core/MenuItem"
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import FormControl from '@material-ui/core/FormControl';
 import Results from "./Results";
+
 
 class App extends Component {
   constructor () {
@@ -16,7 +18,9 @@ class App extends Component {
     this.state = {
       vehicles: [],
       selectvalue : "",
-      seeres: false
+      secondvalue : 0 ,
+      seeres: false ,
+      seesecondvalue : false
     };
     this.onSubmit = this.onSubmit.
     bind(this);  
@@ -25,22 +29,62 @@ class App extends Component {
   onSubmit(e) {
     e.preventDefault();
   console.log(this.state.selectvalue);
-
+    if (this.state.secondvalue === null){
     axios
       .get(`http://localhost:8080/${this.state.selectvalue}`)
       .then(res => {
         console.log(res.data);
-        this.setState( () => ({ vehicles: res.data }));
-        this.setState(state => ({ seeres: !state.seeres }));
+        this.setState( () => ({ vehicles: res.data ,
+                                   seeres: true  }));
+        
       })
       .catch(err =>{
         throw err;
       });
+
+    }
+    else {
+      if (this.state.selectvalue ===  "schedule" ) {
+        axios
+        .get(`http://localhost:8080/${this.state.selectvalue}/${this.state.secondvalue}`,  { params: {
+          stopIds : [7824]
+        } })
+        .then(res => {
+          console.log(res.data);
+          this.setState( () => ({ vehicles: res.data,
+                                  seeres: true,
+                                seesecondvalue : false,
+                              secondvalue : null }));
+        })
+        .catch(err =>{
+          throw err;
+        });
+      }
+      else {
+        axios
+        .get(`http://localhost:8080/${this.state.selectvalue}/${this.state.secondvalue}/stop`)
+        .then(res => {
+          console.log(res.data);
+          this.setState( () => ({ vehicles: res.data,
+            seeres: true,
+          seesecondvalue : false,
+        secondvalue : null }));
+        })
+        .catch(err =>{
+          throw err;
+        });
+      }
+    }
 }
 
 handleChange(event) {
- this.state.selectvalue = event.target.value;
+  console.log(event.target);
+  if (event.target.value == "line" || event.target.value == "schedule")
+    this.setState (() => ( {seesecondvalue : true }));
+  event.persist();
+  this.setState( () => ({[event.target.name] : event.target.value}));
 };
+
 
   render() {
     return (
@@ -49,20 +93,26 @@ handleChange(event) {
         <Typography component="h1" variant="h5">
              Make a query
             </Typography>
-            <Grid
-    // Add it here :)
-      container 
-    
-    >
+            <Grid container>
        <FormControl >
             <Grid item>
       <InputLabel id="label">View</InputLabel>
-      <Select labelId="label" id="select"    value={this.state.selectvalue}
+      <Select labelId="label" id="select" name = "selectvalue"    value = {this.state.selectvalue}
           onChange={this.handleChange}  fullWidth  >
         <MenuItem value={"line"}>Lines</MenuItem>
         <MenuItem value={"passenger"}>Passengers</MenuItem>
         <MenuItem value={"vehicle"}>Vehicles</MenuItem>
+        <MenuItem value={"schedule"}>Schedule</MenuItem>
       </Select>
+      {this.state.seesecondvalue ? <TextField
+            id="lineid"
+            name="secondvalue"
+            label="lineid"
+            value={this.state.secondvalue}
+            onChange={this.handleChange}
+            type="number"
+            margin="normal"
+          /> : null }
       </Grid>
       <Grid item >
       <Button
@@ -75,7 +125,7 @@ handleChange(event) {
               </Grid>
               </FormControl>
               </Grid>
-              <div>
+              <div >
              { this.state.seeres ? <Results vehicles = {this.state.vehicles} /> : null }
         </div>
       </Container>
