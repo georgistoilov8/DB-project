@@ -1,20 +1,3 @@
-/*CREATE OR REPLACE TRIGGER PN_format
-BEFORE INSERT OR UPDATE
-ON Vehicle
-FOR EACH ROW
-DECLARE 
-pnexcp EXCEPTION;
-BEGIN 
-IF NOT REGEXP_LIKE (:NEW.numberPlate,'^[A-Z]{2}[0-9]{4}[A-Z]{2}$') THEN   
-RAISE pnexcp;
-END IF;
-
-EXCEPTION
-WHEN pnexcp THEN
-RAISE_APPLICATION_ERROR(-203, 'Plate number not valid.');
-END;
-*/
-
 CREATE TRIGGER T_CARD_PRICE
 AFTER UPDATE OF price ON Card_Travel
 REFERENCING NEW AS N OLD AS O
@@ -29,22 +12,7 @@ UPDATE CARD_TRAVEL
 SET price = price + 32
 WHERE LINEID = 9041 AND PASSENGEREGN = '2610492833';
 
-/*CREATE OR REPLACE TRIGGER EGN_format
-BEFORE INSERT OR UPDATE
-ON Passenger
-FOR EACH ROW
-DECLARE 
-pnexcp EXCEPTION;
-BEGIN 
-IF NOT REGEXP_LIKE (:NEW.egn,'^[0-9]{10}$') THEN   
-RAISE pnexcp;
-END IF;
-
-EXCEPTION
-WHEN pnexcp THEN
-RAISE_APPLICATION_ERROR(-203, 'EGN not valid.');
-END;
-*/
+-- ---------------------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER T_WORKER
 AFTER UPDATE OF salary ON WORKER
