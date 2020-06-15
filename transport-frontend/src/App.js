@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       vehicles: [],
       selectvalue : "",
-      secondvalue : 0 ,
+      secondvalue : null,
       seeres: false ,
       seesecondvalue : false
     };
@@ -46,9 +46,9 @@ class App extends Component {
     else {
       if (this.state.selectvalue ===  "schedule" ) {
         axios
-        .get(`http://localhost:8080/${this.state.selectvalue}/${this.state.secondvalue}`,  { params: {
+        .get(`http://localhost:8080/${this.state.selectvalue}/${this.state.secondvalue}`, {
           stopIds : [7824]
-        } })
+        })
         .then(res => {
           console.log(res.data);
           this.setState( () => ({ vehicles: res.data,
