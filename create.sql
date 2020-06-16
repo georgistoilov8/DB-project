@@ -58,7 +58,6 @@ CREATE TABLE Passenger(
 );
 
 --Workers_Passengers(firstName, lastName, egn, phone, email, salary, workerTypeID)
--- Няма да го правим. Тъпо е...
 
 -- Vehicle(brand, model, numberPlate, seatCapacity, standingCapacity, airConditioner, wheelchairRamp, vehicleTypeID, lineID)
 CREATE TABLE Vehicle(
